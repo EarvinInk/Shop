@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+your shoppig cart
+{% endblock %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    {% if not cart_items %}
+    OOPs no item found
+    {% else %}
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table">
+                    <thead class="thead-light table-hover text-center">
+                    <tr>
+                        <th class="col-5" scope="col">Product</th>
+                        <th class="col-2" scope="col">price</th>
+                        <th class="col-2" scope="col">quantity</th>
+                        <th class="col-2" scope="col">total</th>
+                        <th class="col-1" scope="col"></th>
+
+                    </tr>
+                    </thead>
+                    <tfoot class="text-right">
+                    <tr>
+                        <td colspan="5">Total<img src="{% static 'images/credits.webp' %}" style="width:5%;">{{total}}</td>
+                    </tr>
+                    </tfoot>
+                    <tbody class="table-body">
+                    {% for cart_item in cart_items %}
+                    <tr class="table-item">
+                        <td class="col-5">
+                            <div class="d-flex align-items-center"><a href="{{ product.get_url }}"><img
+                                    style="width:80px"
+                                    class="cart_img"
+                                    src="{{cart_item.product.image.url}}"
+                                    alt="..."></a>
+                                <div class="cart-title text-start"><a class="text-uppercase text-dark"
+                                                                      href="detail.html"><strong>{{cart_item.product.name}}
+                                </strong></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col-2"><img src="{% static 'images/credits.webp' %}" style="width:25%;">{{cart_item.product.price}}
+                        </td>
+                        <td class="col-2">
+                            <div class="d-flex align-items-center">
+                                <a class="btn btn-items btn-items-increase"
+                                   href="{% url 'cart:remove_item' cart_item.product.id %}"><i
+                                        class="fa-solid fa-plus"></i></a>
+                                {{cart_item.quantity}}
+                                <a class="btn btn-items btn-items-decrease"
+                                   href=" {% url 'cart:add_to_cart' cart_item.product.id %}"><i
+                                        class="fa-solid fa-minus"></i></a>
+                            </div>
+                        </td>
+                        <td class="col-2">{{cart_item.sub_total}}</td>
+                        <td colspan="col-1"><a href="{% url 'cart:delete_item' cart_item.product.id %}"><i
+                                class="fa-solid fa-xmark"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Order summery</h5>
+    <h6 class="card-subtitle mb-2 text-muted"><img src="{% static 'images/credits.webp' %}" style="width:10%;">{{total}}</h6>
+    <p class="card-text">Checkout now or continue shopping</p>
+    <a href="{% url 'shop:allproducts' %}" class="btn btn-primary btn-block">Continue Shopping</a>
+    <a href="#" class="btn btn-secondary btn-block">Checkout</a>
+  </div>
+</div>
+            </div>
+        </div>
+
+
+    </div>
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}
