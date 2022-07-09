@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" class="shadow mt-3">
+                {% csrf_token %}
+                <input class="form-control" type="text" name="task" placeholder="Enter the task">
+                <input class="form-control" type="number" name="priority" placeholder="Set task prority">
+                <input class="form-control" type="date" name="date" placeholder="Set date">
+                <input class="btn btn-success float-right" type="submit">
+
+            </form>
+        </div>
+        <div class="col-md-8">
+            <h6>Tasks to be completed</h6>
+            {% for task in tasks %}
+            <div class="card text-white bg-dark mb-3 shadow mt-3">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{task.name}}</h5>
+
+                        <p class="card-text">{{task.priority}}</p>
+                        <p class="card-text">{{task.date}}</p>
+
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-warning" href="{% url 'task:edit' task.id %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'task:delete' task.id %}">Delete</a>
+                </div>
+            </div>
+
+            {% endfor%}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
