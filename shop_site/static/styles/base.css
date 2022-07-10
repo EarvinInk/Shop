@@ -1,0 +1,64 @@
+/* header */
+header{
+  text-align: center;
+  background-color: #F55353;
+
+}
+.logo{
+  width: 150px;
+  height: 100px;
+}
+
+/* body */
+body{
+
+  background-color: #FEB139;
+
+  color: #143F6B;
+}
+.cat-img{
+width:100%;
+height:50%;}
+/* footer */
+footer{
+  background-color: #F55353;
+  height:100px;
+  text-align:center;
+  padding:10px;
+}
+
+.card{
+ background-color:#F6F54D;
+ padding: 10px;
+}
+
+.card-img-top{
+background-color: #143F6B;
+}
+.cred-img{
+width:10%;
+height:10%;
+}
+
+.cred_pro{
+width:10%;
+height:10%;}
+
+
+.table-wrapper{
+background-color: #F55353;
+border-radius: 10px;
+
+}
+.cart_img{
+margin-right:10%;
+}
+.cart-title{
+margin-left:20%;}
+.fa-solid{
+margin-top:40%;}
+
+.jumbotron {
+
+ background-color: #cccccc;
+}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+searchd:{{querry}}
+{% endblock %}
+
+{% block title %}
+{{querry}}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card-deck">
+        <div class="row">
+
+            {% for product in products %}
+
+            <div class="col-md-4 mt-3">
+                <div class="card" >
+                    <a href="{{product.get_url}}">
+                        <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text"><img src="{% static 'images/Credits.webp' %}">{{product.price}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+    <div>{% if products.paginator.num_pages > 1 %}
+        <div class="page_nos">
+            {%for pg in products.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn {% if products.number == pg %} active {% endif %} ">{{pg}}</a>
+            {% endfor %}
+        </div>
+
+    {% endif %}</div>
+</div>
+
+{% endblock %}
