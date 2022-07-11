@@ -21,6 +21,8 @@ width:100%;
 height:50%;}
 /* footer */
 footer{
+  position:absolute;
+  bottom:0;
   background-color: #F55353;
   height:100px;
   text-align:center;
@@ -61,4 +63,9 @@ margin-top:40%;}
 .jumbotron {
 
  background-color: #cccccc;
+}
+
+#checkout{
+padding 7%;
+margin-top:20px;
 }
