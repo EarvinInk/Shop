@@ -10,12 +10,22 @@ Cart
 
 {% block content %}
 <div class="checkout">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Your Cart</h1>
 
-    {% if not cart_items %}
-    OOPs no item found
-    {% else %}
 
-    <div class="container">
+        {% if not cart_items %}
+        <p class="lead">Your cart is currently empty. Add items to cart to see them here. </p>
+        <hr class="my-4">
+        <p>Shop from our complete selection</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'shop:allproducts' %}" role="button">Go to shop</a>
+        </p>
+        {% else %}
+
+
+        <p class="lead">Your gear is ready to be shipped. </p>
+        <hr class="my-4">
 
         <div class="row">
             <div class="col-md-8">
@@ -32,20 +42,21 @@ Cart
                     </thead>
                     <tfoot class="text-right">
                     <tr>
-                        <td colspan="5">Total<img src="{% static 'images/credits.webp' %}" style="width:5%;">{{total}}</td>
+                        <td colspan="5">Total<img src="{% static 'images/credits.webp' %}" style="width:5%;">{{total}}
+                        </td>
                     </tr>
                     </tfoot>
                     <tbody class="table-body">
                     {% for cart_item in cart_items %}
                     <tr class="table-item">
                         <td class="col-5">
-                            <div class="d-flex align-items-center"><a href="{{ product.get_url }}"><img
-                                    style="width:80px"
-                                    class="cart_img"
-                                    src="{{cart_item.product.image.url}}"
-                                    alt="..."></a>
+                            <div class="d-flex align-items-center">
+                                <a href="{{cart_item.product.get_url}}"><img style="width:80px"
+                                                                             class="cart_img"
+                                                                             src="{{cart_item.product.image.url}}"
+                                                                             alt="..."></a>
                                 <div class="cart-title text-start"><a class="text-uppercase text-dark"
-                                                                      href="detail.html"><strong>{{cart_item.product.name}}
+                                                                      href="{{cart_item.product.get_url}}"><strong>{{cart_item.product.name}}
                                 </strong></a>
                                 </div>
                             </div>
@@ -73,22 +84,25 @@ Cart
                 </table>
             </div>
             <div class="col-md-4">
-                <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Order summery</h5>
-    <h6 class="card-subtitle mb-2 text-muted"><img src="{% static 'images/credits.webp' %}" style="width:10%;">{{total}}</h6>
-    <p class="card-text">Checkout now or continue shopping</p>
-    <a href="{% url 'shop:allproducts' %}" class="btn btn-primary btn-block">Continue Shopping</a>
-    <a href="#" class="btn btn-secondary btn-block">Checkout</a>
-  </div>
-</div>
+
+                <div class="jumbotron summery">
+                    <h1 class="display-4">Order summery</h1>
+
+                    <hr class="my-4">
+                    <p class="lead">Checkout now or continue shopping</p>
+                    TOTAL
+                    <p><img src="{% static 'images/credits.webp' %}" style="width:10%;">{{total}}</p>
+                    <p class="lead">
+                        <a href="{% url 'shop:allproducts' %}" class="btn btn-primary">Continue Shopping</a>
+                        <a href="{% url 'shop:allproducts' %}" class="btn btn-secondary">Checkout</a>
+                    </p>
+                </div>
             </div>
         </div>
 
 
+        {% endif %}
     </div>
-    {% endif %}
-
 
 </div>
 
